@@ -1,26 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import styled, { ThemeProvider } from "styled-components";
+import GlobalStyle from "./components/GlobalStyle";
+import { lightTheme, darkTheme } from "./theme";
+import { Header } from "./components/Header";
+import { OverviewContainer } from "./containers";
 
-function App() {
+export const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={darkTheme}>
+      <GlobalStyle />
+      <Main>
+        <Header />
+        <OverviewContainer />
+      </Main>
+    </ThemeProvider>
   );
-}
+};
 
-export default App;
+const Main = styled.main`
+  width: calc(${(p) => p.theme.desktop} * 0.9);
+
+  @media (max-width: ${(p) => p.theme.mobile}) {
+    width: calc(${(p) => p.theme.mobile} * 0.9);
+  }
+`;
